@@ -5,7 +5,19 @@ using System.Threading.Tasks;
 
 namespace BIR.API.Models
 {
-    public class Bear
+    public class Bear : Animal
     {
+
+        public string Type { get; set; }
+
+        public Bear(int Id, string Sex, int Age, string Name, int Weight, string HealthCondition, string Type) : base(Id, Sex, Age, Name, Weight, HealthCondition)
+        {
+            this.Type = Type;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + "," + this.Type;
+        }
     }
 }
