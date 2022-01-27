@@ -7,16 +7,16 @@ namespace BIR.API.Models
 {
     public class Tiger : Animal
     {
-        public string Type { get; set; }
+        public string TypeOfTiger { get; set; }
 
-        public Tiger(int Id, string Sex, int Age, string Name, int Weight, string HealthCondition, string Type) : base(Id, Sex, Age, Name, Weight, HealthCondition)
+        public Tiger(int Id, string Sex, int Age, string Name, int Weight, string HealthCondition, string TypeOfTiger) : base(Id, Sex, Age, Name, Weight, HealthCondition)
         {
-            this.Type = Type;
+            this.TypeOfTiger = TypeOfTiger;
         }
 
         public override string ToString()
         {
-            return base.ToString() + "," + this.Type;
+            return base.ToString() + "," + this.TypeOfTiger;
         }
     }
 }

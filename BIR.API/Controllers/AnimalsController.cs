@@ -56,54 +56,92 @@ namespace BIR.API.Controllers
             return animal;
         }
 
-        [HttpPost("Animals")]
-        public List<Animal> Post([FromBody] Animal animal)
+        [HttpGet("name/{name}")]
+
+        public IActionResult GetByName([FromRoute] string name)
         {
-            _animals.Add(animal);
-            return _animals;
+            Animal animal = _animals.Find(f => f.Name == name);
+
+            return Ok(animal);
+        }
+
+        [HttpGet("Tiger")]
+
+        public IActionResult GetTiger([FromRoute] string type)
+        {
+            return Ok(this._animals.Where(_animals => _animals is Tiger));
+        
+        }
+        [HttpGet("Lion")]
+        public IActionResult GetLion([FromRoute] string type)
+        {
+            return Ok(this._animals.Where(_animals => _animals is Lion));
+
+        }
+
+        [HttpGet("Bear")]
+        public IActionResult GetBear([FromRoute] string type)
+        {
+            return Ok(this._animals.Where(_animals => _animals is Bear));
+
+        }
+
+        [HttpGet("Deer")]
+        public IActionResult GetDeer([FromRoute] string type)
+        {
+            return Ok(this._animals.Where(_animals => _animals is Deer));
+
         }
 
 
+        [HttpPost("Animals")]
+        public IActionResult Post([FromBody] Animal animal)
+        {
+            _animals.Add(animal);
+            return Ok(_animals);
+        }
+
+        
         [HttpPost("Lions")]
-        public List<Animal> Post([FromBody] Lion lion)
+        public IActionResult Post([FromBody] Lion lion)
         {
             _animals.Add(lion);
-            return _animals;
+            return Ok();
         }
 
 
         [HttpPost("Tigers")]
-        public List<Animal> Post([FromBody] Tiger tiger)
+        public IActionResult Post([FromBody] Tiger tiger)
         {
             _animals.Add(tiger);
-            return _animals;
+            return Ok();
         }
 
 
         [HttpPost("Bears")]
-        public List<Animal> Post([FromBody] Bear bear)
+        public IActionResult Post([FromBody] Bear bear)
         {
             _animals.Add(bear);
-            return _animals;
+            return Ok();
         }
 
 
         [HttpPost("Deers")]
-        public List<Animal> Post([FromBody] Deer deer)
+        public IActionResult Post([FromBody] Deer deer)
         {
             _animals.Add(deer);
-            return _animals;
+            return Ok();
         }
 
 
         [HttpDelete("{id}")]
-        public List<Animal> Delete(int id)
+        public IActionResult Delete(int id)
         {
             Animal animal = _animals.Find(f => f.Id == id);
 
             _animals.Remove(animal);
 
-            return _animals;
+            return Ok(_animals);
         }
 
     }
