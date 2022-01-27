@@ -1,4 +1,5 @@
 ﻿using BIR.API.Models;
+using BIR.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,30 +18,17 @@ namespace BIR.API.Controllers
         List<Animal> _animals = new List<Animal>()
         {
 
-            new Animal(1,"M",10,"Name",120,"good"),
-            new Lion(2,"m",7,"bear",200,"very good",true),
-            new Bear(3,"f",15,"brownie",200,"good","brown bear"),
-            new Tiger(3,"f",3,"tigri",180,"bad","bengal tiger"),
-            new Deer(3,"f",3,"chopper",160,"very good",true)
-
-
-
-
+            
 
         };
 
+        private readonly ILogger<IAnimalService> _logger;
 
 
-
-
-
-        private readonly ILogger<AnimalsController> _logger;
-
-
-        public AnimalsController(ILogger<AnimalsController> logger)
+        public AnimalsController(ILogger<IAnimalService> logger)
         {
             _logger = logger;
-            
+
         }
 
         [HttpGet]
@@ -50,7 +38,7 @@ namespace BIR.API.Controllers
         }
 
         [HttpGet("{id}", Name = "Get")]
-        public Animal Get(int id)
+        public Animal Get(Guid id)
         {
             Animal animal = _animals.Find(f => f.Id == id);
             return animal;
@@ -65,12 +53,38 @@ namespace BIR.API.Controllers
             return Ok(animal);
         }
 
+        [HttpGet("type/{typeValue}")]
+
+        public IActionResult GetByType([FromRoute] string typeValue)
+        {
+            if(typeValue == "Lion")
+            {
+                return Ok(this._animals.Where(_animals => _animals is Lion));
+            }
+            else if(typeValue == "Tiger")
+            {
+                return Ok(this._animals.Where(_animals => _animals is Tiger));
+            }
+            else if( typeValue == "Bear")
+            {
+                return Ok(this._animals.Where(_animals => _animals is Bear));
+            }
+            else if ( typeValue == "Deer")
+            {
+               return Ok(this._animals.Where(_animals => _animals is Deer));
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpGet("Tiger")]
 
         public IActionResult GetTiger([FromRoute] string type)
         {
             return Ok(this._animals.Where(_animals => _animals is Tiger));
-        
+
         }
         [HttpGet("Lion")]
         public IActionResult GetLion([FromRoute] string type)
@@ -101,7 +115,7 @@ namespace BIR.API.Controllers
             return Ok(_animals);
         }
 
-        
+
         [HttpPost("Lions")]
         public IActionResult Post([FromBody] Lion lion)
         {
@@ -135,7 +149,7 @@ namespace BIR.API.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             Animal animal = _animals.Find(f => f.Id == id);
 
@@ -144,5 +158,7 @@ namespace BIR.API.Controllers
             return Ok(_animals);
         }
 
+
+    
     }
 }
