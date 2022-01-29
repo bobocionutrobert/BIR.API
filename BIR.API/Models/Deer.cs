@@ -9,7 +9,7 @@ namespace BIR.API.Models
     {
         public bool Breeding;
 
-        public Deer(int Id, string Sex, int Age, string Name, int Weight, string HealthCondition, bool Breeding) : base(Id, Sex, Age, Name, Weight, HealthCondition)
+        public Deer(Guid Id, string Sex, int Age, string Name, int Weight, string HealthCondition, bool Breeding) : base(Id, Sex, Age, Name, Weight, HealthCondition)
         {
             this.Breeding = Breeding;
         }

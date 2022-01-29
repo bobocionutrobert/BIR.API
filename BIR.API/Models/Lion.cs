@@ -10,7 +10,7 @@ namespace BIR.API.Models
         public bool Leader { get; set; }
 
 
-        public Lion(int Id, string Sex, int Age, string Name, int Weight, string HealthCondition, bool Leader) : base(Id, Sex, Age, Name, Weight, HealthCondition)
+        public Lion(Guid Id, string Sex, int Age, string Name, int Weight, string HealthCondition, bool Leader) : base(Id, Sex, Age, Name, Weight, HealthCondition)
         {
             this.Leader = Leader;
         }

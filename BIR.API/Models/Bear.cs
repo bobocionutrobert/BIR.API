@@ -10,7 +10,7 @@ namespace BIR.API.Models
 
         public string Type { get; set; }
 
-        public Bear(int Id, string Sex, int Age, string Name, int Weight, string HealthCondition, string Type) : base(Id, Sex, Age, Name, Weight, HealthCondition)
+        public Bear(Guid Id, string Sex, int Age, string Name, int Weight, string HealthCondition, string Type) : base(Id, Sex, Age, Name, Weight, HealthCondition)
         {
             this.Type = Type;
         }

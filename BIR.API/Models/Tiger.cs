@@ -9,7 +9,7 @@ namespace BIR.API.Models
     {
         public string TypeOfTiger { get; set; }
 
-        public Tiger(int Id, string Sex, int Age, string Name, int Weight, string HealthCondition, string TypeOfTiger) : base(Id, Sex, Age, Name, Weight, HealthCondition)
+        public Tiger(Guid Id, string Sex, int Age, string Name, int Weight, string HealthCondition, string TypeOfTiger) : base(Id, Sex, Age, Name, Weight, HealthCondition)
         {
             this.TypeOfTiger = TypeOfTiger;
         }
